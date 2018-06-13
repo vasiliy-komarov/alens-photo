@@ -17,7 +17,7 @@ const title = 'Aurelia Navigation Skeleton';
 const outDir = path.resolve(__dirname, project.platform.output);
 const srcDir = path.resolve(__dirname, 'src');
 const nodeModulesDir = path.resolve(__dirname, 'node_modules');
-const baseUrl = '/';
+const baseUrl = '/static/';
 
 const cssRules = [
   { loader: 'css-loader' },
@@ -35,16 +35,23 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
   mode: production ? 'production' : 'development',
   output: {
     path: outDir,
-    publicPath: baseUrl,
+    publicPath: production ? baseUrl : '/',
     filename: production ? '[name].[chunkhash].bundle.js' : '[name].[hash].bundle.js',
     sourceMapFilename: production ? '[name].[chunkhash].bundle.map' : '[name].[hash].bundle.map',
     chunkFilename: production ? '[name].[chunkhash].chunk.js' : '[name].[hash].chunk.js'
   },
   performance: { hints: false },
   devServer: {
+    port: 8080,
     contentBase: outDir,
     // serve index.html for all 404 (required for push-state)
-    historyApiFallback: true
+    historyApiFallback: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:12002',
+        pathRewrite: {'^/api' : ''}
+      }
+    }
   },
   devtool: production ? 'nosources-source-map' : 'cheap-module-eval-source-map',
   module: {

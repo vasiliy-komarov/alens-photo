@@ -7,7 +7,7 @@ export class Root {
     config.title = 'Aurelia';
 
     config.map([
-      { route: ['', 'home'], name: 'mainRoute', moduleId: PLATFORM.moduleName('app'), nav: false },
+      { route: ['', 'home'], name: 'mainRoute', moduleId: PLATFORM.moduleName('pages/main-page/app'), nav: true },
       { route: 'nikitka', name: 'nikitkaRoute', moduleId: PLATFORM.moduleName('../pages/nikitka/nikitka'), nav: true },
     ]);
 

@@ -1,0 +1,44 @@
+<template>
+  <require from="./header.scss"></require>
+  <nav>
+    <div class="nav-wrapper grey lighten-5 app-header">
+
+      <md-navbar>
+        <div class="app-header grey lighten-5">
+          <!--<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>-->
+          <a href="#" class="brand-logo grey-text text-darken-3">Alens Photo</a>
+
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a class="grey-text text-darken-3" href="">Sass</a></li>
+            <li><a class="grey-text text-darken-3" href="">Components</a></li>
+            <li><a class="grey-text text-darken-3" href="">JavaScript</a></li>
+          </ul>
+
+          <a class="button-collapse" md-sidenav-collapse="ref.bind: sideNav;">
+            <i class="material-icons grey-text">menu</i>
+          </a>
+          <md-sidenav view-model.ref="sideNav">
+            <ul>
+              <li md-waves><a href="#">Sass</a></li>
+              <li md-waves><a href="#">Components</a></li>
+              <li md-waves><a href="#">JavaScript</a></li>
+            </ul>
+          </md-sidenav>
+        </div>
+      </md-navbar>
+
+
+      <!--<md-sidenav view-model.ref="sideNav">-->
+      <!--<ul>-->
+      <!--<li md-waves><a href="#">About</a></li>-->
+      <!--<li md-waves><a href="#">Installation</a></li>-->
+      <!--<li md-waves><a href="#">Project Status</a></li>-->
+      <!--<li md-waves><a href="#">Help/Docs</a></li>-->
+      <!--</ul>-->
+      <!--</md-sidenav>-->
+
+      <!--</div>-->
+      <!--</div>-->
+    </div>
+  </nav>
+</template>

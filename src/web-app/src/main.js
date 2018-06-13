@@ -5,7 +5,7 @@ import 'babel-polyfill';
 import * as Bluebird from 'bluebird';
 import 'materialize-css';
 import {isDomReady} from './dom-ready';
-import {} from '../styles/main.scss';
+import '../styles/main.scss';
 
 const log = LogManager.getLogger("Main");
 // remove out if you don't want a Promise polyfill (remove also from webpack.config.js)
@@ -36,11 +36,4 @@ export async function configure(aurelia) {
 
   isDomReady().then(() => aurelia.setRoot(PLATFORM.moduleName('entrypoint/root')))
     .catch(e => log.error('Can\' init', e));
-  // PLATFORM.global.document.addEventListener('DOMContentLoaded', e => log.error('Content LOADED'));
-
-  // new Promise((resolve, reject) => document.addEventListener('DOMContentLoaded', () => resolve()))
-  //   .then(a => {
-  //     log.info('Try to set root', a);
-  //     return aurelia.setRoot(PLATFORM.moduleName('entrypoint/root'))
-  //   }).catch(e => log.error(e));
 }

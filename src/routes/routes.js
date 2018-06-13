@@ -1,18 +1,32 @@
-module.exports = function(app, express) {
+module.exports = function (app, express) {
     const morgan = require('morgan');
     const LOG = require('../utils/log')(module);
     const bodyParser = require('body-parser');
     const errorHandler = require('errorhandler');
+    const path = require('path');
 
-    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
     //app.use(bodyParser({ keepExtensions: true, uploadDir: __dirname + '../public/uploads' }));
 
     app.use(morgan('dev'));
 
-    app.get('/test', (req, res, next) => {
-       res.json({});
+    // app.use('/static', express.static(path.join(`${__dirname}../../../web-app/dist`)));
+
+    // app.get('/api', (req, res, next) => {
+    //     res.json({ "data": "sosi"});
+    // });
+
+    app.get('/', (req, res, next) => {
+
+        // LOG.info(`basedir ${path.basename()}`);
+
+        // LOG.info(path.join(`${__dirname}../../../web-app/dist/index.html`));
+        // res.sendFile(path.join(`${__dirname}../../../web-app/dist/index.html`));
+        // let t = 'test';
+        res.json({});
     });
+
 
     // app.all('/stats/*', (req, res, next) => {
     //     next();
@@ -97,11 +111,11 @@ module.exports = function(app, express) {
         }
     }
 
-    app.use(function(req, res) {
+    app.use(function (req, res) {
         res.status(404).send(`Woops! Requst ${req.url} not found, sorry!`);
     });
 
-    app.use(function(err, req, res, next) {
+    app.use(function (err, req, res, next) {
         if (app.get('env') === 'dev') {
             app.use(errorHandler());
         } else {
