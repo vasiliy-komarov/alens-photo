@@ -11,21 +11,21 @@ module.exports = function (app, express) {
 
     app.use(morgan('dev'));
 
-    // app.use('/static', express.static(path.join(`${__dirname}../../../web-app/dist`)));
+    app.use('/', express.static(path.join(path.dirname(__dirname) + '/web-app/dist')));
 
-    // app.get('/api', (req, res, next) => {
-    //     res.json({ "data": "sosi"});
-    // });
+     app.get('/api', (req, res, next) => {
+         res.json({ "data": "sosi"});
+     });
 
-    app.get('/', (req, res, next) => {
-
-        // LOG.info(`basedir ${path.basename()}`);
-
-        // LOG.info(path.join(`${__dirname}../../../web-app/dist/index.html`));
-        // res.sendFile(path.join(`${__dirname}../../../web-app/dist/index.html`));
-        // let t = 'test';
-        res.json({});
-    });
+//    app.get('/', (req, res, next) => {
+//
+//        // LOG.info(`basedir ${path.basename()}`);
+//
+//         LOG.info(path.join(`${__dirname}../web-app/dist/index.html`));
+//        // res.sendFile(path.join(`${__dirname}../../../web-app/dist/index.html`));
+//        // let t = 'test';
+//        res.json({});
+//    });
 
 
     // app.all('/stats/*', (req, res, next) => {

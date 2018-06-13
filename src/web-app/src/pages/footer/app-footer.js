@@ -1,7 +1,8 @@
 export class AppFooter {
   constructor() {
-    this.__name = 'Alena Philippova';
-    this.__phone = '89001234567';
-    this.__email = 'test@com.ru';
+    this.name = 'Alena Philippova';
+    this.phone = '89001234567';
+    this.email = 'test@com.ru';
+    this.year = new Date().getFullYear();
   }
 }

@@ -13,11 +13,11 @@ const when = (condition, config, negativeConfig) =>
   condition ? ensureArray(config) : ensureArray(negativeConfig);
 
 // primary config:
-const title = 'Aurelia Navigation Skeleton';
+const title = 'Alens Photo';
 const outDir = path.resolve(__dirname, project.platform.output);
 const srcDir = path.resolve(__dirname, 'src');
 const nodeModulesDir = path.resolve(__dirname, 'node_modules');
-const baseUrl = '/static/';
+const baseUrl = '/';
 
 const cssRules = [
   { loader: 'css-loader' },
@@ -35,23 +35,31 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
   mode: production ? 'production' : 'development',
   output: {
     path: outDir,
-    publicPath: production ? baseUrl : '/',
+    publicPath: baseUrl,
     filename: production ? '[name].[chunkhash].bundle.js' : '[name].[hash].bundle.js',
     sourceMapFilename: production ? '[name].[chunkhash].bundle.map' : '[name].[hash].bundle.map',
     chunkFilename: production ? '[name].[chunkhash].chunk.js' : '[name].[hash].chunk.js'
   },
   performance: { hints: false },
   devServer: {
-    port: 8080,
+    port: 7100,
     contentBase: outDir,
     // serve index.html for all 404 (required for push-state)
     historyApiFallback: true,
-    proxy: {
-      '/api': {
+    proxy:{
+      [`/**`]: {
         target: 'http://localhost:12002',
-        pathRewrite: {'^/api' : ''}
+        changeOrigin: true,
+        secure: false,
+        logLevel: 'debug',
       }
     }
+//      {
+//      '/api': {
+//        target: 'http://localhost:12002',
+//        pathRewrite: {'^/api' : ''}
+//      }
+//    }
   },
   devtool: production ? 'nosources-source-map' : 'cheap-module-eval-source-map',
   module: {

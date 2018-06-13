@@ -1,7 +1,6 @@
 <template>
   <require from="./header.scss"></require>
-  <nav>
-    <div class="nav-wrapper grey lighten-5 app-header">
+    <!--<div class="nav-wrapper grey lighten-5 app-header">-->
 
       <md-navbar>
         <div class="app-header grey lighten-5">
@@ -14,9 +13,13 @@
             <li><a class="grey-text text-darken-3" href="">JavaScript</a></li>
           </ul>
 
-          <a class="button-collapse" md-sidenav-collapse="ref.bind: sideNav;">
-            <i class="material-icons grey-text">menu</i>
+          <a class="hide-on-med-and-up blue lighten-4" md-button="floating: true; large: true" md-waves="color: light; circle: true;" md-sidenav-collapse="ref.bind: sideNav;">
+            <i class="material-icons">menu</i>
           </a>
+
+          <!--<a class="button-collapse" md-sidenav-collapse="ref.bind: sideNav;">-->
+            <!--<i class="material-icons">menu</i>-->
+          <!--</a>-->
           <md-sidenav view-model.ref="sideNav">
             <ul>
               <li md-waves><a href="#">Sass</a></li>
@@ -39,6 +42,5 @@
 
       <!--</div>-->
       <!--</div>-->
-    </div>
-  </nav>
+    <!--</div>-->
 </template>
