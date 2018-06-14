@@ -15,6 +15,9 @@ export class Root {
       },
       {
         route: 'contacts', name: 'Contacts', moduleId: PLATFORM.moduleName('../pages/contacts/contacts'), nav: true
+      },
+      {
+        route: 'price', name: 'Price', moduleId: PLATFORM.moduleName('../pages/price/price'), nav: true
       }
     ]);
 

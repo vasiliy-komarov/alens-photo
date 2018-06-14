@@ -6,6 +6,7 @@ import * as Bluebird from 'bluebird';
 import 'materialize-css';
 import {isDomReady} from './dom-ready';
 import '../styles/main.scss';
+import './images/favicon.ico';
 
 const log = LogManager.getLogger("Main");
 // remove out if you don't want a Promise polyfill (remove also from webpack.config.js)
