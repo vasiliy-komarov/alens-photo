@@ -1,11 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const Visualizer = require('webpack-visualizer-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const project = require('./aurelia_project/aurelia.json');
 const {AureliaPlugin, ModuleDependenciesPlugin} = require('aurelia-webpack-plugin');
-const {ProvidePlugin} = require('webpack');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
+const CompressionPlugin = require('compression-webpack-plugin');
+//const {optimize: {CommonsChunkPlugin, UglifyJsPlugin}, ProvidePlugin, DefinePlugin, LoaderOptionsPlugin} = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const {ProvidePlugin, DefinePlugin, LoaderOptionsPlugin} = require('webpack');
 
 // config helpers:
 const ensureArray = (config) => config && (Array.isArray(config) ? config : [config]) || [];
@@ -61,7 +66,7 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
 //      }
 //    }
   },
-  devtool: production ? 'nosources-source-map' : 'cheap-module-eval-source-map',
+  devtool: production ? 'cheap-module-eval-source-map' : 'cheap-module-eval-source-map',
   module: {
     rules: [
       // CSS required in JS/TS files should use the style-loader that auto-injects it into the website
@@ -69,10 +74,11 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
       {
         test: /\.css$/i,
         issuer: [{not: [{test: /\.html$/i}]}],
-        use: extractCss ? ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: cssRules
-        }) : ['style-loader', ...cssRules],
+        // use: extractCss ? ExtractTextPlugin.extract({
+        //   fallback: 'style-loader',
+        //   use: cssRules
+        // }) : ['style-loader', ...cssRules],
+        use: extractCss ? MiniCssExtractPlugin.loader : ['style-loader', ...cssRules],
       },
       {
         test: /\.css$/i,
@@ -83,7 +89,7 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [production ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader', 'sass-loader'],
         issuer: /\.[tj]s$/i
       },
       {
@@ -116,7 +122,17 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
       {test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'file-loader'},
     ]
   },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true // set to true if you want JS source maps
+      })
+    ]
+  },
   plugins: [
+    new Visualizer(),
     new AureliaPlugin(),
     new ProvidePlugin({
       'Promise': 'bluebird'
@@ -126,7 +142,7 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
     }),
     new HtmlWebpackPlugin({
       template: 'index.ejs',
-      favicon: 'src/images/favicon.ico',
+      favicon: 'src/images/test-icon.ico',
       minify: production ? {
         removeComments: true,
         collapseWhitespace: true,
@@ -144,12 +160,29 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
         title, server, baseUrl
       }
     }),
-    ...when(extractCss, new ExtractTextPlugin({
-      filename: production ? '[contenthash].css' : '[id].css',
-      allChunks: true
+      ...when(extractCss, new MiniCssExtractPlugin({
+      filename: production ? '[hash].css' : '[id].css',
+      // allChunks: true
     })),
-    ...when(production, new CopyWebpackPlugin([
-      {from: 'static/favicon.ico', to: 'favicon.ico'}])),
+    // ...when(extractCss, new ExtractTextPlugin({
+    //   filename: production ? '[contenthash].css' : '[id].css',
+    //   allChunks: true
+    // })),
+    ...when(production
+      , [
+        new CopyWebpackPlugin([
+          {from: 'static/favicon.ico', to: 'favicon.ico'}
+        ]),
+        new LoaderOptionsPlugin({
+          minimize: true
+        }),
+        new UglifyJsPlugin({
+          sourceMap: true,
+          exclude: /\/node_modules/
+        }),
+        new CompressionPlugin(),
+      ]
+    ),
     ...when(analyze, new BundleAnalyzerPlugin())
   ]
 });
