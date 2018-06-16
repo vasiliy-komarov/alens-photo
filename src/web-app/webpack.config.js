@@ -1,16 +1,18 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const Visualizer = require('webpack-visualizer-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const project = require('./aurelia_project/aurelia.json');
 const {AureliaPlugin, ModuleDependenciesPlugin} = require('aurelia-webpack-plugin');
-const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const CompressionPlugin = require('compression-webpack-plugin');
-//const {optimize: {CommonsChunkPlugin, UglifyJsPlugin}, ProvidePlugin, DefinePlugin, LoaderOptionsPlugin} = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const {ProvidePlugin, DefinePlugin, LoaderOptionsPlugin} = require('webpack');
+const webpack = require('webpack');
 
 // config helpers:
 const ensureArray = (config) => config && (Array.isArray(config) ? config : [config]) || [];
@@ -29,6 +31,17 @@ const cssRules = [
 ];
 
 module.exports = ({production, server, extractCss, coverage, analyze} = {}) => ({
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        exclude: /\/node_modules/,
+        sourceMap: true // set to true if you want JS source maps
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ]
+  },
   resolve: {
     extensions: ['.js'],
     modules: [srcDir, 'node_modules'],
@@ -66,7 +79,8 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
 //      }
 //    }
   },
-  devtool: production ? 'cheap-module-eval-source-map' : 'cheap-module-eval-source-map',
+  // stats: 'verbose',
+  devtool: production ? 'source-map' : 'inline-source-map',
   module: {
     rules: [
       // CSS required in JS/TS files should use the style-loader that auto-injects it into the website
@@ -122,19 +136,11 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
       {test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'file-loader'},
     ]
   },
-  optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true // set to true if you want JS source maps
-      })
-    ]
-  },
   plugins: [
+    new CleanWebpackPlugin(),
     new Visualizer(),
     new AureliaPlugin(),
-    new ProvidePlugin({
+    new webpack.ProvidePlugin({
       'Promise': 'bluebird'
     }),
     new ModuleDependenciesPlugin({
@@ -164,21 +170,20 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
       filename: production ? '[hash].css' : '[id].css',
       // allChunks: true
     })),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
     // ...when(extractCss, new ExtractTextPlugin({
     //   filename: production ? '[contenthash].css' : '[id].css',
     //   allChunks: true
     // })),
     ...when(production
       , [
-        new CopyWebpackPlugin([
-          {from: 'static/favicon.ico', to: 'favicon.ico'}
-        ]),
-        new LoaderOptionsPlugin({
+        // new CopyWebpackPlugin([
+        //   {from: 'static/favicon.ico', to: 'favicon.ico'}
+        // ]),
+        new webpack.LoaderOptionsPlugin({
           minimize: true
-        }),
-        new UglifyJsPlugin({
-          sourceMap: true,
-          exclude: /\/node_modules/
         }),
         new CompressionPlugin(),
       ]
