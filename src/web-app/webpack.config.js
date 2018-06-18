@@ -20,7 +20,8 @@ const when = (condition, config, negativeConfig) =>
   condition ? ensureArray(config) : ensureArray(negativeConfig);
 
 // primary config:
-const title = 'Alens Photo';
+const title = 'Photographer Alena Filippova';
+const rootDir = path.resolve();
 const outDir = path.resolve(__dirname, project.platform.output);
 const srcDir = path.resolve(__dirname, 'src');
 const nodeModulesDir = path.resolve(__dirname, 'node_modules');
@@ -122,6 +123,7 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
       // embed small images and fonts as Data Urls and larger ones as files:
       {test: /\.(png|gif|jpg|cur)$/i, loader: 'url-loader', options: {limit: 8192}},
       {test: /\.(ico)$/i, loader: 'file-loader?name=[name].[ext]'},
+      { test: /\.json$/, loader: 'json-loader' },
       {
         test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/i,
         loader: 'url-loader',
@@ -148,7 +150,7 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
     }),
     new HtmlWebpackPlugin({
       template: 'index.ejs',
-      favicon: 'src/images/test-icon.ico',
+      favicon: 'src/images/favicon (5).ico',
       minify: production ? {
         removeComments: true,
         collapseWhitespace: true,
@@ -173,6 +175,9 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
+    new CopyWebpackPlugin([
+      { from: `${rootDir}/locales/`, to: `${outDir}/locales` }
+    ]),
     // ...when(extractCss, new ExtractTextPlugin({
     //   filename: production ? '[contenthash].css' : '[id].css',
     //   allChunks: true

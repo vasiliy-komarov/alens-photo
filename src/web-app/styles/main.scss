@@ -1,14 +1,37 @@
-@import "~materialize-css/dist/css/materialize.css";
+$carousel-item-height: 100%;
+$sidenav-font-size: 22px;
+$sidenav-line-height: 56px;
+
+//@import "~materialize-css/dist/css/materialize.css";
+@import "~materialize-css/sass/materialize.scss";
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display');
 
 body {
-  //background-color: rgba(255, 91, 132, 0.15);
-  > router-view {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
+    font-family: 'Playfair Display', serif;
+    router-view {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
 }
 
 main {
-  flex: 1 0 auto;
+    flex: 1 0 auto;
 }
+
+@media #{$large-and-up} {
+    .slider-section {
+        .carousel {
+            height: 570px;
+        }
+    }
+}
+
+@media #{$small-and-down} {
+    .slider-section {
+        .carousel {
+            height: 200px;
+        }
+    }
+}
+

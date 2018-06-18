@@ -3,6 +3,8 @@ import {LogManager} from 'aurelia-framework';
 
 const log = LogManager.getLogger('dom-ready');
 
+isDomReady().then(() => console.info('materialize')).catch(e => console.error(e));
+
 export function isDomReady() {
   return new Promise((resolve, reject) => {
     log.info('PLATFORM.global.document.readyState', PLATFORM.global.document.readyState)

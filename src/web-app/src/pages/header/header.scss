@@ -2,14 +2,23 @@
 
 nav {
     height: 75px;
-}
 
-nav .nav-wrapper {
-  font-family: 'Playfair Display', serif;
-  height: 100%;
+    .header-logo {
+        background: url(header-logo.svg) 0 0 no-repeat;
+        background-size: contain;
+        height: inherit;
+    }
 
-  .app-header{
-    height: 100%;
-  }
+    .sidenav-btn {
+        margin-top: 47px;
+        margin-left: 2px;
+    }
 
+    .nav-wrapper {
+        height: 100%;
+
+        .app-header{
+            height: 100%;
+        }
+    }
 }

@@ -1,0 +1,58 @@
+footer {
+    &.page-footer {
+        background-color: #39393e;
+    }
+
+    a.footer-link,
+    a.social {
+        //background-color: #39393e !important;
+        background-color: #ffffff00;
+        color: rgb(147,146,153);
+        box-shadow: none;
+
+        &:focus,
+        &:hover {
+            background-color: #d8d8d894;
+            color: #d1c8bc !important;
+        }
+        &.facebook {
+            background-color: #3b5998 !important;
+            color: #fff !important;
+        }
+        &.facebook:hover {
+            background-color: #4c70ba !important;
+        }
+        &.instagram {
+            background-color: #3f729b;
+            color: #fff !important;
+        }
+        &.instagram:hover {
+            background-color: #548cb9 !important;
+        }
+
+        &.vk {
+            background-color: #587ea3;
+            color: #fff !important;
+        }
+        &.vk:hover {
+            background-color: #7897b6 !important;
+        }
+        &.twitter {
+            background-color: #55acee;
+            color: #fff !important;
+        }
+        &.twitter:hover {
+            background-color: #83c3f3 !important;
+        }
+
+        &.whatsapp {
+
+        }
+    }
+
+    .btn.social
+    , .btn-large.social
+    , .col.social {
+        padding: 0 2rem 0 0;
+    }
+}

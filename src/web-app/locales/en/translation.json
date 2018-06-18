@@ -1,0 +1,13 @@
+{
+  "front_page": {
+    "header": {
+      "portfolio": "Portfolio",
+      "about": "About",
+      "price": "Price"
+    },
+    "footer": {
+      "name": "Alena Filippova",
+      "copyright": "All rights reserved."
+    }
+  }
+}
