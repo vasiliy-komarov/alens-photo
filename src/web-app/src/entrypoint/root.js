@@ -7,14 +7,14 @@ export class Root {
     // config.title = 'Aurelia';
 
     config.map([
+//      {
+//        route: ''
+//        , redirect: 'home'
+//      }
       {
-        route: ''
-        , redirect: 'home'
-      }, {
-        route: 'home'
+        route: ['', '*path']
         , name: 'home'
         , moduleId: PLATFORM.moduleName('./front')
-        , nav: true
       }, {
         route: 'dashboard'
         , name: 'dashboard'
