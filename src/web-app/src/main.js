@@ -19,14 +19,15 @@ export async function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .plugin(PLATFORM.moduleName('aurelia-materialize-bridge'), b =>
-      // b.useAll()
-      b.useCarousel()
-        .useButton()
-        .useColors()
-        .useNavbar()
-        .useFooter()
-        .useSidenav()
-        .useWaves()
+       b.useAll()
+//      b.useCarousel()
+//        .useBox()
+//        .useButton()
+//        .useColors()
+//        .useNavbar()
+//        .useFooter()
+//        .useSidenav()
+//        .useWaves()
     )
     .plugin(PLATFORM.moduleName('aurelia-i18n'), (instance) => {
       let aliases = ['t', 'i18n'];

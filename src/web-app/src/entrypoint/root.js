@@ -13,7 +13,7 @@ export class Root {
 //      }
       {
         route: ['', '*path']
-        , name: 'home'
+        , name: 'app'
         , moduleId: PLATFORM.moduleName('./front')
       }, {
         route: 'dashboard'

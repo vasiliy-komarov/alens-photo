@@ -1,6 +1,7 @@
 $carousel-item-height: 100%;
 $sidenav-font-size: 22px;
 $sidenav-line-height: 56px;
+$large-screen-up: 1300px;
 
 //@import "~materialize-css/dist/css/materialize.css";
 @import "~materialize-css/sass/materialize.scss";
@@ -23,6 +24,14 @@ main {
     .slider-section {
         .carousel {
             height: 570px;
+        }
+    }
+}
+
+@media #{$extra-large-and-up} {
+    .slider-section {
+        .carousel {
+            height: 850px;
         }
     }
 }

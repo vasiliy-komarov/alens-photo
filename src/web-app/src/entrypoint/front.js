@@ -8,13 +8,26 @@ export class Front {
 
     config.map([
       {
-        route: '', name: 'front-home', moduleId: PLATFORM.moduleName('pages/main-page/app'), nav: true
+        route: ['', 'home']
+        , name: 'front-home'
+        , moduleId: PLATFORM.moduleName('pages/main-page/app')
+        , nav: true
       }, {
-        route: 'portfolio', name: 'front-portfolio', moduleId: PLATFORM.moduleName('pages/gallery-section/gallery-section'), nav: true
+        route: 'portfolio'
+        , name: 'front-portfolio'
+        , moduleId: PLATFORM.moduleName('pages/gallery-section/gallery-section')
+        , nav: true
       }, {
-        route: 'about', name: 'front-about', moduleId: PLATFORM.moduleName('pages/contacts/contacts'), nav: true
-      }, {
-        route: 'price', name: 'front-price', moduleId: PLATFORM.moduleName('pages/price/price'), nav: true
+        route: 'about'
+        , name: 'front-about'
+        , moduleId: PLATFORM.moduleName('pages/contacts/contacts')
+        , nav: true
+      }
+      , {
+        route: 'price'
+        , name: 'front-price'
+        , moduleId: PLATFORM.moduleName('pages/price/price')
+        , nav: true
       }
     ]);
 

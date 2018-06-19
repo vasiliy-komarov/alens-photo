@@ -1,7 +1,8 @@
 <template>
     <require from="./slider-section.scss"></require>
+
     <div class="section slider-section">
-        <md-carousel indicators.bind="true" numVisible.bind="0" fullWidth.bind="true" duration.bind="60">
+        <md-carousel indicators.bind="true" full-width="true" duration.bind="60">
             <md-carousel-item repeat.for="x of 9" image.bind="'http://differ-themes.com/templatemonster/wp/patheon/wp-content/uploads/2018/04/games1-1200x900.jpg'"></md-carousel-item>
         </md-carousel>
     </div>
