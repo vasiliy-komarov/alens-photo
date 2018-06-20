@@ -104,42 +104,106 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
       },
       {
         test: /\.scss$/,
-        use: [production ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader', 'sass-loader'],
-        issuer: /\.[tj]s$/i
-      },
+        use: [production ? MiniCssExtractPlugin.loader : 'style-loader'
+          , 'css-loader'
+          , 'sass-loader']
+        , issuer: /\.[tj]s$/i
+      }
+      ,
       {
-        test: /\.scss$/,
-        use: ['css-loader', 'sass-loader'],
-        issuer: /\.html?$/i
-      },
-      {test: /\.html$/i, loader: 'html-loader'},
+        test: /\.scss$/
+        , use: [
+          'css-loader'
+          , 'sass-loader'
+        ]
+        , issuer: /\.html?$/i
+      }
+      ,
       {
-        test: /\.js$/i, loader: 'babel-loader', exclude: nodeModulesDir,
-        options: coverage ? {sourceMap: 'inline', plugins: ['istanbul']} : {},
-      },
-      {test: /\.json$/i, loader: 'json-loader'},
+        test: /\.html$/i
+        , loader: 'html-loader'
+      }
+      ,
+      {
+//        test: /\.js$/i
+// , loader: 'babel-loader'
+// , exclude: nodeModulesDir
+// ,
+        test: /\.js$/i
+        , loader: 'babel-loader'
+        , exclude: /node_modules\/(?!(dom7|ssr-window|swiper)\/).*/
+        ,
+
+        options: coverage ? {
+          sourceMap: 'inline'
+          , plugins: ['istanbul']
+        } : {}
+        ,
+      }
+      ,
+      {
+        test: /\.json$/i
+        , loader: 'json-loader'
+      }
+      ,
       // use Bluebird as the global Promise implementation:
-      {test: /[\/\\]node_modules[\/\\]bluebird[\/\\].+\.js$/, loader: 'expose-loader?Promise'},
+      {
+        test: /[\/\\]node_modules[\/\\]bluebird[\/\\].+\.js$/
+        , loader: 'expose-loader?Promise'
+      }
+      ,
       // embed small images and fonts as Data Urls and larger ones as files:
-      {test: /\.(png|gif|jpg|cur)$/i, loader: 'url-loader', options: {limit: 8192}},
-      {test: /\.(ico)$/i, loader: 'file-loader?name=[name].[ext]'},
-      { test: /\.json$/, loader: 'json-loader' },
       {
-        test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/i,
-        loader: 'url-loader',
-        options: {limit: 10000, mimetype: 'application/font-woff2'}
-      },
+        test: /\.(png|gif|jpg|cur)$/i
+        , loader: 'url-loader'
+        , options: {limit: 8192}
+      }
+      ,
       {
-        test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/i,
-        loader: 'url-loader',
-        options: {limit: 10000, mimetype: 'application/font-woff'}
-      },
-      // load these fonts normally, as files:
-      {test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'file-loader'},
+        test: /\.(ico)$/i
+        , loader: 'file-loader?name=[name].[ext]'
+      }
+      ,
+      {
+        test: /\.json$/
+        , loader: 'json-loader'
+      }
+      ,
+      {
+        test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/i
+        ,
+        loader: 'url-loader'
+        ,
+        options: {
+          limit: 10000
+          , mimetype: 'application/font-woff2'
+        }
+      }
+      ,
+      {
+        test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/i
+        ,
+        loader: 'url-loader'
+        ,
+        options: {
+          limit: 10000
+          , mimetype: 'application/font-woff'
+        }
+      }
+      ,
+      // load these fonts normally
+      // , as files:
+      {
+        test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i
+        , loader: 'file-loader'
+      }
+      ,
     ]
-  },
+  }
+  ,
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin()
+    ,
     new Visualizer(),
     new AureliaPlugin(),
     new webpack.ProvidePlugin({
@@ -168,7 +232,7 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
         title, server, baseUrl
       }
     }),
-      ...when(extractCss, new MiniCssExtractPlugin({
+    ...when(extractCss, new MiniCssExtractPlugin({
       filename: production ? '[hash].css' : '[id].css',
       // allChunks: true
     })),
@@ -176,7 +240,7 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
     new CopyWebpackPlugin([
-      { from: `${rootDir}/locales/`, to: `${outDir}/locales` }
+      {from: `${rootDir}/locales/`, to: `${outDir}/locales`}
     ]),
     // ...when(extractCss, new ExtractTextPlugin({
     //   filename: production ? '[contenthash].css' : '[id].css',

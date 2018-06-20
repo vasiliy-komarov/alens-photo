@@ -27,7 +27,8 @@
     "bluebird": "^3.5.1",
     "i18next-browser-languagedetector": "^2.2.0",
     "i18next-xhr-backend": "^1.5.1",
-    "materialize-css": "^1.0.0-rc.1"
+    "materialize-css": "^1.0.0-rc.1",
+    "swiper": "^4.3.3"
   },
   "peerDependencies": {},
   "devDependencies": {
