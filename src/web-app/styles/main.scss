@@ -20,13 +20,13 @@ main {
     flex: 1 0 auto;
 }
 
-@media #{$large-and-up} {
-    .slider-section {
-        .carousel {
-            height: 570px;
-        }
-    }
-}
+//@media #{$large-and-up} {
+//    .slider-section {
+//        .carousel {
+//            height: 570px;
+//        }
+//    }
+//}
 
 @media #{$extra-large-and-up} {
     .slider-section {

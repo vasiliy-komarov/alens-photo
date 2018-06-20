@@ -4,13 +4,8 @@ export class Root {
 
   configureRouter(config, router) {
     this.router = router;
-    // config.title = 'Aurelia';
 
     config.map([
-//      {
-//        route: ''
-//        , redirect: 'home'
-//      }
       {
         route: ['', '*path']
         , name: 'app'
