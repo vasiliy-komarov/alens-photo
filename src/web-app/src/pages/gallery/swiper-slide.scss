@@ -33,40 +33,39 @@
     //}
 swiper-slide {
     %transition_all_03s {
-        transition:all .3s ease;
+        transition: all .3s ease;
     }
     %backface_visibility_hidden{
-        backface-visibility:hidden;
-        -webkit-backface-visibility:hidden;
+        backface-visibility: hidden;
     }
 
-    *, *:before, *:after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+    //*, *:before, *:after {
+    //    box-sizing: border-box;
+    //    margin: 0;
+    //    padding: 0;
+    //}
 
     .swiper-container {
         width: 80%;
         height: 100vh;
         // display:inline-block;
         // vertical-align:top;
-        float:left;
-        transition:opacity .6s ease, transform .3s ease;
+        float: left;
+        transition: opacity .6s ease, transform .3s ease;
         &.nav-slider{
-            width:20%;
-            padding-left:5px;
+            width: 20%;
+            padding-left: 5px;
             .swiper-slide{
-                cursor:pointer;
-                opacity:.4;
-                transition:opacity .3s ease;
+                cursor: pointer;
+                opacity: .4;
+                transition: opacity .3s ease;
                 &.swiper-slide-active{
-                    opacity:1;
+                    opacity: 1;
                 }
                 .content{
-                    width:100%;
+                    width: 100%;
                     .title{
-                        font-size:20px;
+                        font-size: 20px;
                     }
                 }
             }
@@ -74,14 +73,14 @@ swiper-slide {
         &:hover{
             .swiper-button-prev,
             .swiper-button-next{
-                transform:translateX(0);
-                opacity:1;
-                visibility:visible;
+                transform: translateX(0);
+                opacity: 1;
+                visibility: visible;
             }
         }
         &.loading{
-            opacity:0;
-            visibility:hidden;
+            opacity: 0;
+            visibility: hidden;
         }
     }
     .swiper-wrapper{
@@ -100,7 +99,7 @@ swiper-slide {
             background-size:cover;
         }
         .entity-img{
-            display:none;
+            //display:none;
         }
         .content{
             position:absolute;
