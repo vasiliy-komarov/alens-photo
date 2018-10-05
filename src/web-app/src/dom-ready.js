@@ -3,16 +3,18 @@ import {LogManager} from 'aurelia-framework';
 
 const log = LogManager.getLogger('dom-ready');
 
-isDomReady().then(() => console.info('materialize')).catch(e => console.error(e));
+isDomReady().then(() => log.info('materialize')).catch(e => console.error(e));
 
 export function isDomReady() {
   return new Promise((resolve, reject) => {
-    log.info('PLATFORM.global.document.readyState', PLATFORM.global.document.readyState)
+    log.info('PLATFORM.global.document.readyState', PLATFORM.global.document.readyState);
     if (document.readyState !== 'loading') {
-      console.error('document is already ready, just execute code here');
+      log.error('document is already ready, just execute code here');
+      resolve();
     } else {
       document.addEventListener('DOMContentLoaded', function () {
-        console.error('document was not ready, place code here');
+        log.error('document was not ready, place code here');
+        resolve();
       });
     }
   });

@@ -67,8 +67,8 @@ export async function configure(aurelia) {
     aurelia.use.plugin(PLATFORM.moduleName('aurelia-testing'));
   }
   await aurelia.start();
-  // aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('entrypoint/root')));
+//  await aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('entrypoint/root')));
 
-  isDomReady().then(() => aurelia.setRoot(PLATFORM.moduleName('entrypoint/root')))
-    .catch(e => log.error('Can\' init', e));
+  await aurelia.setRoot(PLATFORM.moduleName('entrypoint/root'));
+//  isDomReady().then(() => aurelia.setRoot(PLATFORM.moduleName('entrypoint/root'))).catch(e => log.error('Can\' init', e));
 }
