@@ -1,15 +1,21 @@
 <template>
     <require from="./app.scss"></require>
     <require from="../gallery-section/gallery-section.html"></require>
-    <require from="../slider-section/slider-section.html"></require>
+    <!--<require from="../slider-section/slider-section.html"></require>-->
 
     <main>
-        <div class="">
-            <div class="row">
-                <slider-section></slider-section>
+        <div class="container-fluid">
+            <div class="swiper-container" ref="swiperContainer">
+                <div class="swiper-wrapper">
+                    <img src.bind="m.imageSrc" class="swiper-slide" repeat.for="m of images"/>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next" ref="btnNext"></div>
+                <div class="swiper-button-prev" ref="btnPrev"></div>
             </div>
+                <!--<slider-section class="s12 m12 l12 xl12"></slider-section>-->
             <div class="row">
-                <gallery-section></gallery-section>
+                <gallery-section class="s12 m12 l12 xl12"></gallery-section>
             </div>
         </div>
     </main>
