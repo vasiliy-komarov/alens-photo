@@ -1,11 +1,19 @@
 {
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/aurelia-.*",
+      "**/aurelia-.*/**"
+    ]
+  },
   "name": "alens-photo",
-  "version": "1.0.0",
   "description": "",
-  "main": "./src/app/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/app/server.js"
+    "bootstrap": "lerna bootstrap",
+    "reset": "npx rimraf node_modules && lerna clean -y && lerna bootstrap"
   },
   "repository": {
     "type": "git",
@@ -17,12 +25,14 @@
     "url": "https://github.com/vasiliy-komarov/alens-photo/issues"
   },
   "homepage": "https://github.com/vasiliy-komarov/alens-photo#readme",
-  "dependencies": {
-    "body-parser": "^1.18.3",
-    "errorhandler": "^1.5.0",
-    "express": "^4.16.3",
-    "morgan": "^1.9.0",
-    "nconf": "^0.10.0",
-    "winston": "^2.4.2"
+  "devDependencies": {
+    "eslint": "5.6.1",
+    "gulp": "4.0.0",
+    "gulp-rename": "1.4.0",
+    "nps": "5.9.3",
+    "nps-utils": "1.7.0",
+    "aurelia-cli": "0.35.1",
+    "lerna": "3.4.1",
+    "del": "3.0.0"
   }
 }

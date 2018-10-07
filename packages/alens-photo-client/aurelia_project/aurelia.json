@@ -1,5 +1,5 @@
 {
-  "name": "web-app",
+  "name": "alens-photo-client",
   "type": "project:application",
   "bundler": {
     "id": "webpack",
