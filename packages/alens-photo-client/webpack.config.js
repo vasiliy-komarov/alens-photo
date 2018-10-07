@@ -46,6 +46,7 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
   resolve: {
     extensions: ['.js'],
     modules: [srcDir, 'node_modules'],
+    symlinks: false,
   },
   entry: {
     app: ['aurelia-bootstrapper'],
