@@ -31,7 +31,7 @@ module.exports = function (config) {
       'test/karma-bundle.js': [ 'webpack' ]
     },
 
-    webpack: require('../webpack.config')({ coverage: true }),
+    webpack: require('../webpack.config')({ coverage: true, karma: true }),
 
     /*
      * test results reporter to use
@@ -39,12 +39,12 @@ module.exports = function (config) {
      * possible values: 'dots', 'progress'
      * available reporters: https://npmjs.org/browse/keyword/karma-reporter
      */
-    reporters: [ 'mocha', 'progress', 'coverage' ],
+    reporters: [ 'mocha', 'progress', 'coverage-istanbul' ],
 
-    coverageReporter: {
-      reporters: [ { type: 'html' }, { type: 'lcovonly' }, { type: 'text-summary' } ],
+    coverageIstanbulReporter: {
+      reports: [ 'html', 'lcovonly', 'text-summary' ],
       dir: path.resolve(__dirname, 'coverage-karma'),
-      subdir: '.',
+      fixWebpackSourcePaths: true,
     },
 
     // Webpack please don't spam the console when running in karma!

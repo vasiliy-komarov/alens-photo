@@ -4,9 +4,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const project = require('./aurelia_project/aurelia.json');
@@ -31,7 +32,7 @@ const cssRules = [
   {loader: 'css-loader'},
 ];
 
-module.exports = ({production, server, extractCss, coverage, analyze} = {}) => ({
+module.exports = ({production, server, extractCss, coverage, analyze, karma} = {}) => ({
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
@@ -44,9 +45,11 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
     ]
   },
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.ts', '.js'],
     modules: [srcDir, 'node_modules'],
-    symlinks: false,
+    // Enforce single aurelia-binding, to avoid v1/v2 duplication due to
+    // out-of-date dependencies on 3rd party aurelia plugins
+    alias: {'aurelia-binding': path.resolve(__dirname, 'node_modules/aurelia-binding')}
   },
   entry: {
     app: ['aurelia-bootstrapper'],
@@ -126,20 +129,8 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
       }
       ,
       {
-//        test: /\.js$/i
-// , loader: 'babel-loader'
-// , exclude: nodeModulesDir
-// ,
-        test: /\.js$/i
-        , loader: 'babel-loader'
-        , exclude: /node_modules\/(?!(dom7|ssr-window|swiper)\/).*/
-        ,
-
-        options: coverage ? {
-          sourceMap: 'inline'
-          , plugins: ['istanbul']
-        } : {}
-        ,
+        test: /\.tsx?$/
+        , loader: "ts-loader"
       }
       ,
       {
@@ -151,6 +142,7 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
       {
         test: /[\/\\]node_modules[\/\\]bluebird[\/\\].+\.js$/
         , loader: 'expose-loader?Promise'
+        , exclude: /node_modules\/(?!(dom7|ssr-window|swiper)\/).*/
       }
       ,
       // embed small images and fonts as Data Urls and larger ones as files:
@@ -192,19 +184,23 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
         }
       }
       ,
-      // load these fonts normally
-      // , as files:
+      // load these fonts normally, as files:
       {
         test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i
         , loader: 'file-loader'
       }
       ,
+      ...when(coverage, {
+        test: /\.[jt]s$/i, loader: 'istanbul-instrumenter-loader',
+        include: srcDir, exclude: [/\.{spec,test}\.[jt]s$/i],
+        enforce: 'post', options: {esModules: true},
+      })
     ]
   }
   ,
   plugins: [
-    new CleanWebpackPlugin()
-    ,
+    ...when(!karma, new DuplicatePackageCheckerPlugin()),
+    new CleanWebpackPlugin(),
     new Visualizer(),
     new AureliaPlugin(),
     new webpack.ProvidePlugin({
@@ -240,24 +236,18 @@ module.exports = ({production, server, extractCss, coverage, analyze} = {}) => (
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    new CopyWebpackPlugin([
-      {from: `${rootDir}/locales/`, to: `${outDir}/locales`}
-    ]),
-    // ...when(extractCss, new ExtractTextPlugin({
-    //   filename: production ? '[contenthash].css' : '[id].css',
-    //   allChunks: true
-    // })),
     ...when(production
       , [
-        // new CopyWebpackPlugin([
-        //   {from: 'static/favicon.ico', to: 'favicon.ico'}
-        // ]),
         new webpack.LoaderOptionsPlugin({
           minimize: true
         }),
         new CompressionPlugin(),
       ]
     ),
+    ...when(production || server, new CopyWebpackPlugin([
+      {from: 'static', to: outDir}
+      , {from: `${rootDir}/locales/`, to: `${outDir}/locales`}
+    ])),
     ...when(analyze, new BundleAnalyzerPlugin())
   ]
 });

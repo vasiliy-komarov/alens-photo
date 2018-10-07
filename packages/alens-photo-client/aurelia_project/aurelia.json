@@ -15,9 +15,9 @@
   "platform": {
     "id": "web",
     "displayName": "Web",
-    "port": 8080,
     "hmr": false,
     "open": false,
+    "port": 7100,
     "output": "dist"
   },
   "loader": {
@@ -25,18 +25,13 @@
     "displayName": "None"
   },
   "transpiler": {
-    "id": "babel",
-    "displayName": "Babel",
-    "fileExtension": ".js",
-    "options": {
-      "plugins": [
-        "transform-es2015-modules-amd"
-      ]
-    }
+    "id": "typescript",
+    "displayName": "TypeScript",
+    "fileExtension": ".ts"
   },
   "markupProcessor": {
-    "id": "maximum",
-    "displayName": "Maximum Minification",
+    "id": "minimum",
+    "displayName": "Minimal Minification",
     "fileExtension": ".html"
   },
   "cssProcessor": {
@@ -48,7 +43,7 @@
     "id": "none",
     "displayName": "None"
   },
-  "unitTestRunner": [
+  "unitTestRunners": [
     {
       "id": "karma",
       "displayName": "Karma"
