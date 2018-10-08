@@ -1,5 +1,5 @@
 import {inject, TaskQueue, LogManager} from 'aurelia-framework';
-import * as SwModule from 'swiper';
+import SwModule from 'swiper';
 
 const log = LogManager.getLogger('Swiper-slide');
 

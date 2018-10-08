@@ -66,6 +66,7 @@ module.exports = ({production, server, extractCss, coverage, analyze, karma} = {
   performance: {hints: false},
   devServer: {
     port: 7100,
+    host: '0.0.0.0',
     contentBase: outDir,
     // serve index.html for all 404 (required for push-state)
     historyApiFallback: true,
