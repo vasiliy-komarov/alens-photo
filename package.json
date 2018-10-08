@@ -13,7 +13,7 @@
   "description": "",
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "reset": "npx rimraf node_modules && lerna clean -y && lerna bootstrap"
+    "reset": "npx rimraf node_modules && npx lerna clean -y && npx lerna bootstrap"
   },
   "repository": {
     "type": "git",

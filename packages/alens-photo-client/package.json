@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "@types/materialize-css": "^1.0.4",
+    "@types/swiper": "^4.2.1",
     "aurelia-animator-css": "^1.0.4",
     "aurelia-bootstrapper": "^2.2.0",
     "aurelia-fetch-client": "^1.6.0",

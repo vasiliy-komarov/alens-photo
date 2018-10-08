@@ -1,5 +1,5 @@
 import {inject, TaskQueue, LogManager} from 'aurelia-framework';
-import Swiper from 'swiper';
+import * as SwModule from 'swiper';
 
 const log = LogManager.getLogger('Swiper-slide');
 
@@ -111,7 +111,7 @@ export class SwiperSlide {
           }
         }
       };
-      let mainSlider = new Swiper(mainSliderSelector, mainSliderOptions);
+      let mainSlider = new SwModule.Swiper(mainSliderSelector, <SwModule.SwiperOptions>mainSliderOptions);
 
 // Navigation Slider
       let navSliderOptions = {
@@ -133,14 +133,14 @@ export class SwiperSlide {
             this.el.classList.remove('loading');
           },
           click: function () {
-            // mainSlider.autoplay.stop();
+            mainSlider.autoplay.stop();
           }
         }
       };
-      let navSlider = new Swiper(navSliderSelector, navSliderOptions);
+      let navSlider = new SwModule.Swiper(navSliderSelector, <SwModule.SwiperOptions>navSliderOptions);
 // Matching sliders
-//       mainSlider.controller.control = navSlider;
-//       navSlider.controller.control = mainSlider;
+      mainSlider.controller.control = navSlider;
+      navSlider.controller.control = mainSlider;
     });
   }
 }

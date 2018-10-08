@@ -33,17 +33,17 @@ const cssRules = [
 ];
 
 module.exports = ({production, server, extractCss, coverage, analyze, karma} = {}) => ({
-  optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        exclude: /\/node_modules/,
-        sourceMap: true // set to true if you want JS source maps
-      }),
-      new OptimizeCSSAssetsPlugin({})
-    ]
-  },
+  // optimization: {
+  //   minimizer: [
+  //     new UglifyJsPlugin({
+  //       cache: true,
+  //       parallel: true,
+  //       exclude: /\/node_modules/,
+  //       sourceMap: true // set to true if you want JS source maps
+  //     }),
+  //     new OptimizeCSSAssetsPlugin({})
+  //   ]
+  // },
   resolve: {
     extensions: ['.ts', '.js'],
     modules: [srcDir, 'node_modules'],

@@ -1,5 +1,5 @@
 import {inject, TaskQueue, LogManager} from 'aurelia-framework';
-import Swiper from "swiper";
+import * as SwModule from "swiper";
 
 const log = LogManager.getLogger('app-js');
 
@@ -7,7 +7,7 @@ const log = LogManager.getLogger('app-js');
 export class App {
   taskQueue: TaskQueue;
   images: Array<Object>;
-  swiperContainer: Element;
+  swiperContainer: HTMLElement;
   btnNext: Element;
   btnPrev: Element;
 
@@ -37,7 +37,7 @@ export class App {
 
   attached() {
     this.taskQueue.queueMicroTask(() => {
-      new Swiper(this.swiperContainer, {
+      new SwModule.Swiper(this.swiperContainer, <SwModule.SwiperOptions>{
         loop: true,
         speed: 500,
         // slidesPerView: 3,

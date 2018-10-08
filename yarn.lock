@@ -650,6 +650,11 @@
   resolved "https://registry.yarnpkg.com/@types/sizzle/-/sizzle-2.3.2.tgz#a811b8c18e2babab7d542b3365887ae2e4d9de47"
   integrity sha512-7EJYyKTL7tFR8+gDbB6Wwz/arpGa0Mywk1TJbNzKzHtzbwVmY4HR9WqS5VV7dsBUKQmPNr192jHr/VpBluj/hg==
 
+"@types/swiper@^4.2.1":
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/@types/swiper/-/swiper-4.2.1.tgz#78081d0d69c0f5395d91e55c6b1630c3c0c32128"
+  integrity sha512-oTEBHoFNDcLzkoZmo01wj50Cc9a2D0wAPFVbT7nCTLAYQIOtT01Cq5M+gZrxrdw3LVYlYX6LiSMlY4Kk+XbVlA==
+
 "@types/tapable@*":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@types/tapable/-/tapable-1.0.4.tgz#b4ffc7dc97b498c969b360a41eee247f82616370"
