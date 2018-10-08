@@ -26,6 +26,10 @@
   },
   "homepage": "https://github.com/vasiliy-komarov/alens-photo#readme",
   "devDependencies": {
+    "@types/jasmine": "^2.8.6",
+    "@types/lodash": "^4.14.105",
+    "@types/node": "^10.11.4",
+    "@types/webpack": "^4.1.1",
     "eslint": "5.6.1",
     "gulp": "4.0.0",
     "gulp-rename": "1.4.0",
@@ -33,6 +37,7 @@
     "nps-utils": "1.7.0",
     "aurelia-cli": "0.35.1",
     "lerna": "3.4.1",
-    "del": "3.0.0"
+    "del": "3.0.0",
+    "typescript": "^3.1.1"
   }
 }
