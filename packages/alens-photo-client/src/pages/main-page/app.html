@@ -1,15 +1,11 @@
 <template>
     <require from="./app.scss"></require>
-    <require from="../gallery-section/gallery-section.html"></require>
 
     <main>
         <div class="container-fluid">
             <swiper options-provider.bind="swiperOptionsProvider">
                 <img src.bind="m.imageSrc" class="swiper-slide" repeat.for="m of images"/>
             </swiper>
-            <div class="row">
-                <gallery-section class="s12 m12 l12 xl12"></gallery-section>
-            </div>
         </div>
     </main>
 </template>

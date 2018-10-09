@@ -17,9 +17,14 @@ export class Front {
       }, {
         route: 'portfolio'
         , name: 'front-portfolio'
-        , moduleId: PLATFORM.moduleName('pages/gallery/gallery')
+        , moduleId: PLATFORM.moduleName('pages/portfolio/portfolio')
         , nav: true
       }, {
+        route: 'gallery/:id'
+        , name: 'front-album'
+        , moduleId: PLATFORM.moduleName('pages/gallery/gallery')
+      }
+      , {
         route: 'about'
         , name: 'front-about'
         , moduleId: PLATFORM.moduleName('pages/contacts/contacts')

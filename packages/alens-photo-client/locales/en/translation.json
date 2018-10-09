@@ -1,6 +1,7 @@
 {
   "front_page": {
     "header": {
+      "home": "Home",
       "portfolio": "Portfolio",
       "about": "About/Contacts",
       "price": "Price"
