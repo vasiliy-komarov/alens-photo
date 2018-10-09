@@ -1,37 +1,30 @@
 <template>
     <require from="./swiper-slide.scss"></require>
-    <div class="swiper-container main-slider loading">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide" repeat.for="m of images">
-                <figure class="slide-bgimg">
-                    <!--<figure class="slide-bgimg" style="background-image:url(https://drive.google.com/uc?export=view&id=0B_koKn2rKOkLbVhsNzdIYmlfN1E)">-->
-                    <img src.bind="m.imageSrc" class="entity-img" />
-                </figure>
-                <div class="content">
-                    <p class="title">${m.title}</p>
-                    <span class="caption">${m.caption}</span>
-                </div>
+
+    <swiper view-model.ref="mainSwiperElement" options-provider.bind="mainSwiperOptionsProvider" class="main-slider loading">
+        <div class="swiper-slide" repeat.for="m of images">
+            <figure class="slide-bgimg">
+                <!--<figure class="slide-bgimg" style="background-image:url(https://drive.google.com/uc?export=view&id=0B_koKn2rKOkLbVhsNzdIYmlfN1E)">-->
+                <img src.bind="m.imageSrc" class="entity-img"/>
+            </figure>
+            <div class="content">
+                <p class="title">${m.title}</p>
+                <span class="caption">${m.caption}</span>
             </div>
         </div>
-        <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev swiper-button-white"></div>
-        <div class="swiper-button-next swiper-button-white"></div>
-    </div>
+    </swiper>
 
     <!-- Thumbnail navigation -->
-    <div class="swiper-container nav-slider loading">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide" repeat.for="m of images">
-                <figure class="slide-bgimg">
-                    <!--<figure class="slide-bgimg" style="background-image:url(https://drive.google.com/uc?export=view&id=0B_koKn2rKOkLbVhsNzdIYmlfN1E)">-->
-                    <img src.bind="m.imageSrc" class="entity-img" />
-                </figure>
-                <div class="content">
-                    <p class="title">${m.title}</p>
-                    <span class="caption">${m.caption}</span>
-                </div>
+    <swiper view-model.ref="navSwiperElement" options-provider.bind="navSwiperOptionsProvider" class="nav-slider loading">
+        <div class="swiper-slide" repeat.for="m of images">
+            <figure class="slide-bgimg">
+                <!--<figure class="slide-bgimg" style="background-image:url(https://drive.google.com/uc?export=view&id=0B_koKn2rKOkLbVhsNzdIYmlfN1E)">-->
+                <img src.bind="m.imageSrc" class="entity-img"/>
+            </figure>
+            <div class="content">
+                <p class="title">${m.title}</p>
+                <span class="caption">${m.caption}</span>
             </div>
         </div>
-    </div>
-
+    </swiper>
 </template>

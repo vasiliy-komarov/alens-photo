@@ -1,8 +1,10 @@
 import {bindable} from 'aurelia-framework';
+import {DeferredPromise, promise} from '../../tools/promises';
 import SwiperConstructor, {Swiper, SwiperOptions} from 'swiper';
 import assign from 'lodash/assign';
 import has from 'lodash/has';
 
+export * from 'swiper';
 export type SwiperOptionsProvider = (HtmlElement) => SwiperOptions
 
 export class SwiperCustomElement {
@@ -13,6 +15,7 @@ export class SwiperCustomElement {
   private swiperInstance: Swiper;
   private containerEl: HTMLElement;
   private swiperOptions: SwiperOptions;
+  private bound: DeferredPromise<void> = promise();
 
   private get hasNextBtn(): boolean {
     return has(this.swiperOptions, 'navigation.nextEl');
@@ -26,8 +29,8 @@ export class SwiperCustomElement {
     return has(this.swiperOptions, 'pagination');
   }
 
-  public getSwiperInstance(): Swiper {
-    return this.swiperInstance;
+  public getSwiperInstance(): Promise<Swiper> {
+    return this.bound.then(() => this.swiperInstance);
   }
 
   bind() {
@@ -39,6 +42,7 @@ export class SwiperCustomElement {
     );
     // @ts-ignore
     this.swiperInstance = new SwiperConstructor(this.containerEl, this.swiperOptions);
+    this.bound.resolve();
   }
 
   attached() {
@@ -50,5 +54,6 @@ export class SwiperCustomElement {
     this.swiperInstance.destroy(true, false);
     this.swiperInstance = null;
     this.swiperOptions = null;
+    this.bound = null;
   }
 }

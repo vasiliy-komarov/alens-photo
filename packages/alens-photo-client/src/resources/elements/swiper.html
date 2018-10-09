@@ -1,10 +1,10 @@
-<template>
-    <div class="swiper-container" ref="containerEl">
-        <div class="swiper-wrapper">
-            <slot></slot>
-        </div>
-        <div if.one-time="hasPagination" class="swiper-pagination"></div>
-        <div if.one-time="hasNextBtn" class="swiper-button-next"></div>
-        <div if.one-time="hasPrevBtn" class="swiper-button-prev"></div>
+<template class="swiper-container" ref="containerEl">
+    <require from="./swiper.scss"></require>
+
+    <div class="swiper-wrapper">
+        <slot></slot>
     </div>
+    <div if.one-time="hasPagination" class="swiper-pagination"></div>
+    <div if.one-time="hasNextBtn" class="swiper-button-next"></div>
+    <div if.one-time="hasPrevBtn" class="swiper-button-prev"></div>
 </template>
