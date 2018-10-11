@@ -1,6 +1,10 @@
 nav {
     height: 75px;
 
+    .menu-hamburger {
+        z-index: 999;
+    }
+
     .header-logo {
         background: url(header-logo.svg) 0 0 no-repeat;
         background-size: contain;

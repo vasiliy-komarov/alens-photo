@@ -1,3 +1,11 @@
+.main-app-content {
+    .app-image {
+        background-size: cover;
+        background: no-repeat center;
+        height: calc(100vh - 335px);
+        width: 100vw;
+    }
+}
 //.view {
 //  margin: 10px;
 //  float: left;

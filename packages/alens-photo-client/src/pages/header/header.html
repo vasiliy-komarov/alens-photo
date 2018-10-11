@@ -12,17 +12,17 @@
                 <li><a class="grey-text text-darken-3" route-href="route: front-about;" t="front_page.header.about"></a></li>
             </ul>
 
-            <a class="sidenav-btn hide-on-med-and-up blue darken-2" md-button="floating: true; large: true;"
+            <a class="sidenav-btn hide-on-med-and-up blue darken-2 menu-hamburger" md-button="floating: true; large: true;"
                md-waves="color: light; circle: true;" md-sidenav-collapse="ref.bind: sideNav;">
                 <i class="material-icons">menu</i>
             </a>
 
-            <md-sidenav view-model.ref="sideNav">
+            <md-sidenav view-model.ref="sideNav" class="header-sidenav">
                 <ul>
-                    <li md-waves><a route-href="route: front-home;" t="front_page.header.home"></a></li>
-                    <li md-waves><a route-href="route: front-portfolio;" t="front_page.header.portfolio"></a></li>
-                    <li md-waves><a route-href="route: front-price;" t="front_page.header.price"></a></li>
-                    <li md-waves><a route-href="route: front-about" t="front_page.header.about"></a></li>
+                    <li md-waves><a route-href="route: front-home;" t="front_page.header.home" click.delegate="closePanel()"></a></li>
+                    <li md-waves><a route-href="route: front-portfolio;" t="front_page.header.portfolio" click.delegate="closePanel()"></a></li>
+                    <li md-waves><a route-href="route: front-price;" t="front_page.header.price" click.delegate="closePanel()"></a></li>
+                    <li md-waves><a route-href="route: front-about" t="front_page.header.about" click.delegate="closePanel()"></a></li>
                 </ul>
             </md-sidenav>
         </div>
