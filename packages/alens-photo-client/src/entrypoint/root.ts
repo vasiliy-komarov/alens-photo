@@ -95,13 +95,13 @@ export class Root {
         , name: 'dashboard'
         , viewPorts: {
           top: {
-            moduleId: PLATFORM.moduleName('pages/header/header')
+            moduleId: PLATFORM.moduleName('pages/dashboard/header/header')
           }
           , main: {
-            moduleId: PLATFORM.moduleName('./dashboard')
+            moduleId: PLATFORM.moduleName('pages/dashboard/dashboard')
           }
           , bottom: {
-            moduleId: PLATFORM.moduleName('pages/footer/app-footer')
+            moduleId: PLATFORM.moduleName('pages/dashboard/footer/footer')
           }
         }
       }

@@ -27,9 +27,22 @@ const outDir = path.resolve(__dirname, project.platform.output);
 const srcDir = path.resolve(__dirname, 'src');
 const nodeModulesDir = path.resolve(__dirname, 'node_modules');
 const baseUrl = '/';
+const { browserslist: browsers } = require('./package.json');
 
 const cssRules = [
   {loader: 'css-loader'},
+  {
+    loader: 'postcss-loader',
+    options: {
+      plugins: () => [
+        require('autoprefixer')({browsers})
+      ]
+    }
+  }
+];
+
+const sassRules = [
+  ...cssRules, 'sass-loader'
 ];
 
 module.exports = ({production, server, extractCss, coverage, analyze, karma} = {}) => ({
@@ -110,17 +123,13 @@ module.exports = ({production, server, extractCss, coverage, analyze, karma} = {
       {
         test: /\.scss$/,
         use: [production ? MiniCssExtractPlugin.loader : 'style-loader'
-          , 'css-loader'
-          , 'sass-loader']
+          , ...sassRules ]
         , issuer: /\.[tj]s$/i
       }
       ,
       {
         test: /\.scss$/
-        , use: [
-          'css-loader'
-          , 'sass-loader'
-        ]
+        , use: [...sassRules]
         , issuer: /\.html?$/i
       }
       ,
