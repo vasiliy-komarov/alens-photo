@@ -1,5 +1,5 @@
 import {PLATFORM} from 'aurelia-pal';
-import {RouterConfiguration, Router} from 'aurelia-router';
+import {Router, RouterConfiguration} from 'aurelia-router';
 
 export class Root {
   router: Router;
@@ -17,10 +17,10 @@ export class Root {
             moduleId: PLATFORM.moduleName('pages/header/header')
           }
           , main: {
-            moduleId: PLATFORM.moduleName('pages/main-page/app')
+            moduleId: PLATFORM.moduleName('pages/home/home')
           }
           , bottom: {
-            moduleId: PLATFORM.moduleName('pages/footer/app-footer')
+            moduleId: PLATFORM.moduleName('pages/footer/footer')
           }
         }
       }, {
@@ -34,7 +34,7 @@ export class Root {
             moduleId: PLATFORM.moduleName('pages/portfolio/portfolio')
           }
           , bottom: {
-            moduleId: PLATFORM.moduleName('pages/footer/app-footer')
+            moduleId: PLATFORM.moduleName('pages/footer/footer')
           }
         }
         , nav: true
@@ -49,7 +49,7 @@ export class Root {
             moduleId: PLATFORM.moduleName('pages/gallery/gallery')
           }
           , bottom: {
-            moduleId: PLATFORM.moduleName('pages/footer/app-footer')
+            moduleId: PLATFORM.moduleName('pages/footer/footer')
           }
         }
       }
@@ -65,7 +65,7 @@ export class Root {
             moduleId: PLATFORM.moduleName('pages/contacts/contacts')
           }
           , bottom: {
-            moduleId: PLATFORM.moduleName('pages/footer/app-footer')
+            moduleId: PLATFORM.moduleName('pages/footer/footer')
           }
         }
       }
@@ -81,7 +81,7 @@ export class Root {
             moduleId: PLATFORM.moduleName('pages/price/price')
           }
           , bottom: {
-            moduleId: PLATFORM.moduleName('pages/footer/app-footer')
+            moduleId: PLATFORM.moduleName('pages/footer/footer')
           }
         }
       }

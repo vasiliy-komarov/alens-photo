@@ -1,4 +1,4 @@
-import {bindable} from 'aurelia-framework';
+import {bindable, TaskQueue, autoinject} from 'aurelia-framework';
 import {DeferredPromise, promise} from '../../tools/promises';
 import SwiperConstructor, {Swiper, SwiperOptions} from 'swiper';
 import assign from 'lodash/assign';
@@ -7,6 +7,7 @@ import has from 'lodash/has';
 export * from 'swiper';
 export type SwiperOptionsProvider = (HtmlElement) => SwiperOptions
 
+@autoinject
 export class SwiperCustomElement {
 
   @bindable()
@@ -16,6 +17,9 @@ export class SwiperCustomElement {
   private containerEl: HTMLElement;
   private swiperOptions: SwiperOptions;
   private bound: DeferredPromise<void> = promise();
+
+  constructor(private taskQueue: TaskQueue) {
+  }
 
   private get hasNextBtn(): boolean {
     return has(this.swiperOptions, 'navigation.nextEl');
@@ -47,7 +51,7 @@ export class SwiperCustomElement {
 
   attached() {
     // @ts-ignore
-    this.swiperInstance.init();
+    this.taskQueue.queueTask(() => this.swiperInstance.init());
   }
 
   unbind() {

@@ -1,0 +1,11 @@
+<template>
+    <require from="./home.scss"></require>
+
+    <section class="home-section container-fluid content-inscribed">
+        <swiper options-provider.bind="swiperOptionsProvider">
+            <div class="home-slide swiper-slide content-inscribed"
+                 css="background-image: url(${image.imageSrc})"
+                 repeat.for="image of images"></div>
+        </swiper>
+    </section>
+</template>

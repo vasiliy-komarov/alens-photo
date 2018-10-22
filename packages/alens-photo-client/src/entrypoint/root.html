@@ -1,5 +1,11 @@
 <template>
-    <router-view name="top"></router-view>
-    <router-view name="main" swap-order="before"></router-view>
-    <router-view name="bottom"></router-view>
+    <header class="app-header">
+        <router-view containerless name="top"></router-view>
+    </header>
+    <main class="app-content">
+        <router-view containerless name="main" swap-order="before"></router-view>
+    </main>
+    <footer class="app-footer">
+        <router-view containerless name="bottom"></router-view>
+    </footer>
 </template>

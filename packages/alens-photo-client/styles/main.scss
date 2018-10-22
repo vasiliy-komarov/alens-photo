@@ -8,40 +8,102 @@ $large-screen-up: 1300px;
 @import '~swiper/dist/css/swiper.css';
 @import url('https://fonts.googleapis.com/css?family=Playfair+Display');
 
+$page-background-color: color("grey", "lighten-5");
+
+$app-header-height: (
+    "normal": 75px,
+    "small": 50px
+);
+
+$app-footer-height: (
+    "normal": 80px,
+    "small": 50px
+);
+
+$app-content-min-height: (
+    "normal": 800px,
+    "small": 400px
+);
+
+@function footerHeaderHeight($size) {
+    $header-height: map-get($app-header-height, $size);
+    $footer-height: map-get($app-footer-height, $size);
+    @return $header-height + $footer-height;
+}
+
+@function contentHeight($size: 'normal') {
+    @return calc(100vh - #{footerHeaderHeight($size)})
+}
+
+body, html {
+    overflow: auto;
+}
+
 body {
     font-family: 'Playfair Display', serif;
-    router-view {
-        display: flex;
-        min-height: 100vh;
-        flex-direction: column;
+    background-color: $page-background-color;
+}
+
+.app-header {
+    display: block;
+    width: 100%;
+    height: map-get($app-header-height, 'normal');
+    position: fixed;
+    z-index: 1000;
+    background-color: transparentize($page-background-color, 0.4);
+
+    @media #{$small-and-down} {
+        height: map-get($app-header-height, 'small');
     }
 }
 
-main {
-    flex: 1 0 auto;
+.app-footer {
+    display: block;
+    width: 100%;
+    height: map-get($app-footer-height, 'normal');
+
+    @media #{$small-and-down} {
+        height: map-get($app-footer-height, 'small');
+    }
 }
 
-//@media #{$large-and-up} {
-//    .slider-section {
-//        .carousel {
-//            height: 570px;
-//        }
-//    }
-//}
+.app-content {
+    display: block;
+    width: 100%;
 
-@media #{$extra-large-and-up} {
-    .slider-section {
-        .carousel {
-            height: 850px;
+    @media #{$medium-and-up} {
+        $min-height: map-get($app-content-min-height, 'normal');
+        margin-top: map-get($app-header-height, 'normal');
+        min-height: contentHeight('normal');
+        @media (max-height: $min-height) {
+            min-height: #{$min-height - footerHeaderHeight('small')};
+        }
+    }
+
+    @media #{$small-and-down} {
+        $min-height: map-get($app-content-min-height, 'small');
+        margin-top: map-get($app-header-height, 'small');
+        min-height: contentHeight('small');
+        @media (max-height: $min-height) {
+            min-height: #{$min-height - footerHeaderHeight('small')};
+        }
+    }
+
+    .content-inscribed {
+        @media #{$medium-and-up} {
+            $min-height: map-get($app-content-min-height, 'normal');
+            height: contentHeight('normal');
+            @media (max-height: $min-height) {
+                min-height: #{$min-height - footerHeaderHeight('small')};
+            }
+        }
+
+        @media #{$small-and-down} {
+            $min-height: map-get($app-content-min-height, 'small');
+            height: contentHeight('small');
+            @media (max-height: $min-height) {
+                min-height: #{$min-height - footerHeaderHeight('small')};
+            }
         }
     }
 }
-
-@media #{$small-and-down} {
-    .slider-section {
-        .carousel {
-            height: 200px;
-        }
-    }
-}
-

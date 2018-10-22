@@ -1,7 +1,7 @@
 <template>
     <require from="./header.scss"></require>
     <nav class="top-nav">
-        <div class="nav-wrapper grey lighten-5">
+        <div class="nav-wrapper">
             <a route-href="route: front-home;" class="brand-logo center grey-text text-darken-3">
                 <svg class="header-logo"></svg>
             </a>
@@ -18,6 +18,7 @@
             </a>
 
             <md-sidenav view-model.ref="sideNav" class="header-sidenav">
+                <!--TODO: may be loop over navigable routes-->
                 <ul>
                     <li md-waves><a route-href="route: front-home;" t="front_page.header.home" click.delegate="closePanel()"></a></li>
                     <li md-waves><a route-href="route: front-portfolio;" t="front_page.header.portfolio" click.delegate="closePanel()"></a></li>

@@ -1,9 +1,6 @@
-import {LogManager} from 'aurelia-framework';
 import {SwiperOptionsProvider} from '../../resources/elements/swiper';
 
-const log = LogManager.getLogger('app-js');
-
-export class App {
+export class Home {
 
   private images: Array<Object> = [
     {
@@ -26,12 +23,12 @@ export class App {
   private swiperOptionsProvider: SwiperOptionsProvider = () => ({
     loop: true,
     speed: 500,
-    autoHeight: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
+    },
     roundLengths: true,
-    preloadImages: true,
-    updateOnImagesReady: true,
-    // slidesPerView: 3,
-    centeredSlides: true,
+    slidesPerView: 1,
     pagination: {
       el: '.swiper-pagination',
       dynamicBullets: true,

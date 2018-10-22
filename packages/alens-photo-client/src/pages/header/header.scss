@@ -1,26 +1,33 @@
-nav {
-    height: 75px;
+.top-nav {
+    height: 100%;
+    background-color: transparent;
 
     .menu-hamburger {
         z-index: 999;
     }
 
+    .brand-logo {
+        height: inherit;
+    }
+
     .header-logo {
-        background: url(header-logo.svg) 0 0 no-repeat;
+        background: url(header-logo.svg) no-repeat center;
         background-size: contain;
         height: inherit;
     }
 
-    .sidenav-btn {
-        margin-top: 47px;
-        margin-left: 2px;
-    }
-
     .nav-wrapper {
         height: 100%;
+        position: relative;
+    }
 
-        .app-header{
-            height: 100%;
-        }
+    .sidenav-btn {
+        position: absolute;
+        bottom: -20px;
+        left: 2px;
+    }
+
+    .header-sidenav {
+        z-index: 999;
     }
 }
