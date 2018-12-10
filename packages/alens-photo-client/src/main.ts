@@ -7,7 +7,7 @@ import {I18N, TCustomAttribute} from 'aurelia-i18n';
 import Backend from 'i18next-xhr-backend';
 import LngDetector from 'i18next-browser-languagedetector';
 import 'materialize-css';
-import * as Bluebird from 'bluebird';
+import Bluebird from 'bluebird';
 import 'whatwg-fetch';
 import '../styles/main.scss';
 

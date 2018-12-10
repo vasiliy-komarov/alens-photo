@@ -2,6 +2,13 @@
     height: 100%;
     background-color: transparent;
 
+    .menu-items {
+        li, li a {
+            height: 100%;
+        }
+        height: 100%;
+    }
+
     .menu-hamburger {
         z-index: 999;
     }
